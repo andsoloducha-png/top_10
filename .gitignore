@@ -1,0 +1,11 @@
+.venv/
+.agents/
+.codex/
+__pycache__/
+*.pyc
+.streamlit/secrets.toml
+streamlit.err.log
+streamlit.out.log
+*.xlsx
+~$*.xlsx
+.~lock.*#
