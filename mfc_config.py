@@ -14,6 +14,14 @@ JAM_WASTELINE_END = 317.030
 CHUTE_FULL_MIN = 200.0
 CHUTE_FULL_MAX = 300.0
 
+RETURN_DIMENSION_ITEMS = (105.020, 106.020)
+RETURN_DIMENSION_EVENTS = (
+    "product out of dimensions",
+    "product too high",
+    "product too long",
+    "product too wide",
+)
+
 CHART_COLORS = [
     "#fb923c",
     "#60a5fa",

@@ -43,6 +43,9 @@ The same filters are applied to both quarters:
   - When disabled, excludes `Product jam` rows with `Item` from `301.010` to `317.030`.
 - `Chute full return`
   - When disabled, excludes `Chute full` rows outside the `200-299` item range.
+- `Return dimension events`
+  - When disabled, excludes return-line dimension events on items `105.020` and `106.020`.
+  - Covered events: `Product out of dimensions`, `Product too high`, `Product too long`, `Product too wide`.
 - `Exclude outside 06:00-22:30`
 - `Exclude Sundays`
 - `Reject events longer than limit`

@@ -85,6 +85,7 @@ with st.sidebar:
 
     include_jam_wasteline = st.checkbox("Jam Wasteline", value=True)
     include_chute_full_return = st.checkbox("Chute full return", value=True)
+    include_return_dimensions = st.checkbox("Return dimension events", value=True)
     exclude_nights = st.checkbox("Exclude outside 06:00-22:30", value=False)
     exclude_sundays = st.checkbox("Exclude Sundays", value=False)
     use_max_minutes = st.checkbox("Reject events longer than limit", value=False)
@@ -152,6 +153,7 @@ previous_processed = process_period(
     max_minutes,
     include_jam_wasteline,
     include_chute_full_return,
+    include_return_dimensions,
 )
 current_processed = process_period(
     current_raw,
@@ -162,6 +164,7 @@ current_processed = process_period(
     max_minutes,
     include_jam_wasteline,
     include_chute_full_return,
+    include_return_dimensions,
 )
 
 all_events = (

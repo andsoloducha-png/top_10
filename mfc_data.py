@@ -13,6 +13,8 @@ from mfc_config import (
     PROCESS_END,
     PROCESS_START,
     REQUIRED_COLUMNS,
+    RETURN_DIMENSION_EVENTS,
+    RETURN_DIMENSION_ITEMS,
 )
 
 
@@ -143,6 +145,7 @@ def apply_special_flags(
     df: pd.DataFrame,
     include_jam_wasteline: bool,
     include_chute_full_return: bool,
+    include_return_dimensions: bool,
 ) -> pd.DataFrame:
     if df.empty:
         return df.copy()
@@ -165,6 +168,11 @@ def apply_special_flags(
         chute_full_2xx = item_number.ge(CHUTE_FULL_MIN) & item_number.lt(CHUTE_FULL_MAX)
         keep &= ~(chute_full & ~chute_full_2xx)
 
+    if not include_return_dimensions:
+        return_dimension_event = description.isin(RETURN_DIMENSION_EVENTS)
+        return_dimension_item = item_number.round(3).isin(RETURN_DIMENSION_ITEMS)
+        keep &= ~(return_dimension_event & return_dimension_item)
+
     return result[keep].copy()
 
 
@@ -177,9 +185,15 @@ def process_period(
     max_minutes: float | None,
     include_jam_wasteline: bool,
     include_chute_full_return: bool,
+    include_return_dimensions: bool,
 ) -> pd.DataFrame:
     result = df[(df["Begin"] >= period_start) & (df["Begin"] < period_end)].copy()
-    result = apply_special_flags(result, include_jam_wasteline, include_chute_full_return)
+    result = apply_special_flags(
+        result,
+        include_jam_wasteline,
+        include_chute_full_return,
+        include_return_dimensions,
+    )
     if result.empty:
         result["Duration_seconds"] = pd.Series(dtype="float64")
         return result
